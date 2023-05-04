@@ -21,3 +21,12 @@
 svg {
   font-size: 5rem;
 }
+
+.logo {
+  background-image: url("./images/travel.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 100px;
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
