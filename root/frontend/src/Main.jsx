@@ -5,6 +5,7 @@ import './Main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Landing } from './containers/Landing'
 import { Cities } from './containers/Cities'
+import { NewCity } from './containers/NewCity'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/cities',
     element: <Cities />
+  },
+  {
+    path: '/newCity',
+    element: <NewCity />
   }
 ])
 

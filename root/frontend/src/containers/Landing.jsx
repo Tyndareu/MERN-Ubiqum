@@ -1,6 +1,7 @@
 import { FaMusic, FaPlane, FaTrain, FaArrowCircleRight } from 'react-icons/fa'
 import { MdRestaurant } from 'react-icons/md'
 import { Footer } from './Footer'
+import Button from '@mui/material/Button';
 
 export const Landing = () => {
     return (
@@ -17,8 +18,8 @@ export const Landing = () => {
             <FaArrowCircleRight />
             <h4 className='mt-5'>Want to build your own MYtineracy?</h4>
             <div className='mt-5' style={{ display: 'flex', justifyContent: 'space-between', width: '70%', margin: 'auto' }}>
-                <a href='/login' className='btn btn-success'>Login</a>
-                <a href='/register' className='btn btn-success'>Register</a>
+                <Button variant="contained" color="primary">Login</Button>
+                <Button variant="contained" color="primary">Register</Button>
             </div>
             <Footer />
         </>
