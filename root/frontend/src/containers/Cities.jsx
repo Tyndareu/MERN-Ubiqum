@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import travel from '../images/travel.jpg'
+import { useGetCitiesQuery, useDeleteCityMutation } from '../features/cities/apiSlice'
 import {
   makeStyles,
   Card,
@@ -22,36 +23,32 @@ const useStyles = makeStyles({
 })
 
 export const Cities = () => {
-  const [cities, setCities] = useState([])
-  const [isLoading, setIsLoading] = useState([true])
   const [searchCity, setSearchCity] = useState('')
   const classes = useStyles()
   const navigate = useNavigate()
   let cityFilter = []
 
-  useEffect(() => {
-    fetch('http://localhost:3000/all')
-      .then((res) => res.json())
-      .then((data) => {
-        setCities(data)
-        setIsLoading(false)
-      })
-  }, [])
+  const { data, isError, isLoading, error } = useGetCitiesQuery()
+  const [deleteCity] = useDeleteCityMutation()
+
+  if (isLoading) {
+    return <h4>Loading...</h4>
+  }
+
+  if (isError) {
+    return <h4>Error: {error} </h4>
+  }
 
   const handleOnSearchCity = (e) => {
     setSearchCity(e.target.value)
   }
 
   if (searchCity === '') {
-    cityFilter = cities
+    cityFilter = data
   } else {
-    cityFilter = cities.filter((x) =>
+    cityFilter = data.filter((x) =>
       x.name.toLowerCase().startsWith(searchCity.toLowerCase())
     )
-  }
-
-  if (isLoading) {
-    return <h4>Loading...</h4>
   }
 
   return (
@@ -93,6 +90,7 @@ export const Cities = () => {
                 </Typography>
               </CardContent>
             </CardActionArea>
+            <Button onClick={() => deleteCity(city.name)}>Delete</Button>
           </Card>
         ))}
       </div>

@@ -3,5 +3,8 @@
         "activityBar.background": "#53045D",
         "titleBar.activeBackground": "#740582",
         "titleBar.activeForeground": "#FEFBFF"
-    }
+    },
+    "cSpell.words": [
+        "reduxjs"
+    ]
 }

@@ -4,24 +4,27 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 import { isMobile } from '../../utils/utils'
+import { useCreateCityMutation } from '../features/cities/apiSlice'
 export const NewCity = () => {
   const navigate = useNavigate()
-  const [name, setName] = useState()
-  const [country, setCountry] = useState()
+  const [city, setCity] = useState({
+    name: '',
+    country: ''
+  })
 
-  const handleOnName = (e) => {
-    setName(e.target.value)
+  const [createCity] = useCreateCityMutation()
+
+  const handleChange = (e) => {
+    setCity({
+      ...city,
+      [e.target.name]: e.target.value
+    })
   }
-  const handleOnCountry = (e) => {
-    setCountry(e.target.value)
-  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    const newCity = {
-      name,
-      country
-    }
-    alert('name ' + newCity.name + ' country ' + newCity.country)
+    console.log(city)
+    createCity(city)
   }
   return (
     <>
@@ -30,19 +33,21 @@ export const NewCity = () => {
       <form onSubmit={handleOnSubmit}>
         <TextField
           required
+          name='name'
           id="outlined-required"
           label="Name - Required"
           margin="normal"
           color="secondary"
-          onChange={handleOnName}
+          onChange={handleChange}
         />
         <TextField
           required
+          name='country'
           id="outlined-required"
           label="Country - Required"
           margin="normal"
           color="secondary"
-          onChange={handleOnCountry}
+          onChange={handleChange}
         />
         <TextField margin="normal" color="secondary" type="file" />
         <div>
