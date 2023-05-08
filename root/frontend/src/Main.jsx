@@ -6,9 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Landing } from './containers/Landing'
 import { Cities } from './containers/Cities'
 import { NewCity } from './containers/NewCity'
-import { ApiProvider } from '@reduxjs/toolkit/query/react'
-//import { store } from './app/store'
-import { apiSlice } from './features/cities/apiSlice'
+import { Provider } from 'react-redux'
+import { store } from './app/store'
 
 const router = createBrowserRouter([
   {
@@ -22,11 +21,15 @@ const router = createBrowserRouter([
   {
     path: '/newCity',
     element: <NewCity />
+  },
+  {
+    path: '/newcity/:name',
+    element: <NewCity />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ApiProvider api={apiSlice}>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </ApiProvider>
+  </Provider>
 )

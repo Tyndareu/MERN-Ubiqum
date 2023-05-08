@@ -1,18 +1,20 @@
 import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 import { isMobile } from '../../utils/utils'
-import { useCreateCityMutation } from '../features/cities/apiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { addCity, editCity } from '../features/cities/citiesSlice'
 export const NewCity = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const cities = useSelector(state => state.tasks)
+  const params = useParams()
   const [city, setCity] = useState({
     name: '',
     country: ''
   })
-
-  const [createCity] = useCreateCityMutation()
 
   const handleChange = (e) => {
     setCity({
@@ -23,9 +25,20 @@ export const NewCity = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    console.log(city)
-    createCity(city)
+    if (params.name) {
+      dispatch(editCity(city))
+      navigate(-1)
+    } else {
+      dispatch(addCity(city))
+      navigate(-1)
+    }
   }
+
+  useEffect(() => {
+    if (params.name) {
+      setCity(cities.find(city => city.name === params.name))
+    }
+  }, [])
   return (
     <>
       {isMobile ? <Logo /> : null}
@@ -39,6 +52,7 @@ export const NewCity = () => {
           margin="normal"
           color="secondary"
           onChange={handleChange}
+          value={city.name}
         />
         <TextField
           required
@@ -48,6 +62,7 @@ export const NewCity = () => {
           margin="normal"
           color="secondary"
           onChange={handleChange}
+          value={city.country}
         />
         <TextField margin="normal" color="secondary" type="file" />
         <div>

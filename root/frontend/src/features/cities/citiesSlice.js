@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { allCities } from '../../components/utils'
 
-const initialState = []
+const initialState = allCities
 
 export const citiesSlice = createSlice({
   name: 'cities',
@@ -10,14 +11,15 @@ export const citiesSlice = createSlice({
       state.push(action.payload)
     },
     editCity: (state, action) => {
-      const index = state.findIndex(city => city.id === action.payload.id)
+      const index = state.findIndex(city => city.name === action.payload.name)
       state[index] = action.payload
     },
     deleteCity: (state, action) => {
-      return state.filter(city => city.id !== action.payload)
+      const index = state.find(city => city.name === action.payload.name)
+      state.splice(state.indexOf(index), 1)
     }
   }
 })
 
-export const { addCity } = citiesSlice.actions
+export const { addCity, deleteCity, editCity } = citiesSlice.actions
 export default citiesSlice.reducer

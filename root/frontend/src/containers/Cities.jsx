@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import travel from '../images/travel.jpg'
-import { useGetCitiesQuery, useDeleteCityMutation } from '../features/cities/apiSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   makeStyles,
   Card,
@@ -12,6 +12,7 @@ import {
   Button
 } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
+import { deleteCity } from '../features/cities/citiesSlice'
 
 const useStyles = makeStyles({
   root: {
@@ -26,29 +27,23 @@ export const Cities = () => {
   const [searchCity, setSearchCity] = useState('')
   const classes = useStyles()
   const navigate = useNavigate()
+  const cityState = useSelector(state => state.tasks)
+  const dispatch = useDispatch()
   let cityFilter = []
-
-  const { data, isError, isLoading, error } = useGetCitiesQuery()
-  const [deleteCity] = useDeleteCityMutation()
-
-  if (isLoading) {
-    return <h4>Loading...</h4>
-  }
-
-  if (isError) {
-    return <h4>Error: {error} </h4>
-  }
 
   const handleOnSearchCity = (e) => {
     setSearchCity(e.target.value)
   }
 
   if (searchCity === '') {
-    cityFilter = data
+    cityFilter = cityState
   } else {
-    cityFilter = data.filter((x) =>
+    cityFilter = cityState.filter((x) =>
       x.name.toLowerCase().startsWith(searchCity.toLowerCase())
     )
+  }
+  const handleDelete = (name) => {
+    dispatch(deleteCity(name))
   }
 
   return (
@@ -90,7 +85,8 @@ export const Cities = () => {
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <Button onClick={() => deleteCity(city.name)}>Delete</Button>
+            <Button onClick={() => handleDelete(city.name)}>Delete</Button>
+            <Button onClick={() => navigate('/newCity/' + city.name)}>Edit</Button>
           </Card>
         ))}
       </div>
