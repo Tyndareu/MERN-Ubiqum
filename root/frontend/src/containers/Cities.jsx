@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import travel from '../images/travel.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -12,7 +12,7 @@ import {
   Button
 } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
-import { deleteCity } from '../features/cities/citiesSlice'
+import { deleteCity, fetchAllCities } from '../features/cities/citiesSlice'
 
 const useStyles = makeStyles({
   root: {
@@ -31,19 +31,23 @@ export const Cities = () => {
   const dispatch = useDispatch()
   let cityFilter = []
 
+  useEffect(() => {
+    dispatch(fetchAllCities())
+  }, [])
+
   const handleOnSearchCity = (e) => {
     setSearchCity(e.target.value)
   }
 
-  if (searchCity === '') {
-    cityFilter = cityState
+  if (searchCity.list === '') {
+    cityFilter = cityState.list
   } else {
-    cityFilter = cityState.filter((x) =>
+    cityFilter = cityState.list.filter((x) =>
       x.name.toLowerCase().startsWith(searchCity.toLowerCase())
     )
   }
-  const handleDelete = (name) => {
-    dispatch(deleteCity(name))
+  const handleDelete = (id) => {
+    dispatch(deleteCity(id))
   }
 
   return (
@@ -69,7 +73,7 @@ export const Cities = () => {
         }}
       >
         {cityFilter.map((city) => (
-          <Card key={city.name} className={classes.root}>
+          <Card key={city._id} className={classes.root}>
             <CardActionArea>
               <CardMedia
                 className={classes.media}
@@ -85,8 +89,8 @@ export const Cities = () => {
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <Button onClick={() => handleDelete(city.name)}>Delete</Button>
-            <Button onClick={() => navigate('/newCity/' + city.name)}>Edit</Button>
+            <Button onClick={() => { handleDelete(city._id) }}>Delete</Button>
+            <Button onClick={() => navigate('/newCity/' + city._id)}>Edit</Button>
           </Card>
         ))}
       </div>

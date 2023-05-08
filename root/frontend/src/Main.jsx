@@ -23,13 +23,13 @@ const router = createBrowserRouter([
     element: <NewCity />
   },
   {
-    path: '/newcity/:name',
+    path: '/newcity/:id',
     element: <NewCity />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
 )

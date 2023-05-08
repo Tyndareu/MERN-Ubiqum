@@ -1,17 +1,9 @@
+/* eslint-disable new-cap */
 import { Router } from 'express'
 import { cityModel } from '../../model/cityModel.js'
 
 const router = Router()
 
-router.get('/', (req, res) => {
-  res.send('home page')
-})
-
-router.get('/all', (req, res) => {
-  cityModel.find({})
-    .then(city => res.send(city))
-    .catch(err => console.log(err))
-})
 router.get('/all/', (req, res) => {
   cityModel.find({})
     .then(city => res.send(city))
@@ -19,7 +11,6 @@ router.get('/all/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  // eslint-disable-next-line new-cap
   const newCity = new cityModel({
     name: req.body.name,
     country: req.body.country
@@ -34,11 +25,21 @@ router.post('/', (req, res) => {
     })
 })
 
-router.delete('/:name', (req, res) => {
-  console.log(req.params.name)
-  /* cityModel.findByIdAndDelete(req.params.name)
-  .then(city => res.send(city))
-    .catch(err => console.log(err)) */
+router.delete('/:id', (req, res) => {
+  cityModel.findByIdAndDelete(req.params.id)
+    .then(city => res.send(city))
+    .catch(err => console.log(err))
+})
+
+router.post('/post/:id', (req, res) => {
+  cityModel.findByIdAndUpdate(req.params.id, { name: req.body.name, country: req.body.country })
+    .then(city => {
+      res.send(city)
+    })
+    .catch(err => {
+      console.error(err)
+      res.status(501).send('server error')
+    })
 })
 
 export default router

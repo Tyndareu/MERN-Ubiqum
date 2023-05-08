@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Logo } from '../components/Logo'
-import { isMobile } from '../../utils/utils'
+import { isMobile } from '../components/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCity, editCity } from '../features/cities/citiesSlice'
 export const NewCity = () => {
@@ -25,7 +25,7 @@ export const NewCity = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    if (params.name) {
+    if (params.id) {
       dispatch(editCity(city))
       navigate(-1)
     } else {
@@ -33,10 +33,9 @@ export const NewCity = () => {
       navigate(-1)
     }
   }
-
   useEffect(() => {
-    if (params.name) {
-      setCity(cities.find(city => city.name === params.name))
+    if (params.id) {
+      setCity(cities.list.find(city => city._id === params.id))
     }
   }, [])
   return (
