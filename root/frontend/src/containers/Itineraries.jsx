@@ -32,7 +32,7 @@ export function Itineraries () {
       >
         {itineraryState.list.map((itinerary) => (
           <div
-          style={{ width: 180 }}
+            style={{ width: 180 }}
             key={itinerary._id}
           >
             <Card>
