@@ -74,14 +74,14 @@ export const Cities = () => {
         }}
       >
         {cityFilter.map((city) => (
-          <Card key={city._id} className={classes.root}>
+          <Card onClick={() => navigate('/Itineraries/' + city.name)} key={city._id} className={classes.root}>
             <CardActionArea>
               <CardMedia
                 className={classes.media}
                 image={city.img ? city.img : travel}
                 title={city.name}
               />
-              <CardContent onClick={() => navigate('/Itineraries/' + city.name)}>
+              <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {city.name}
                 </Typography>
