@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Footer } from './Footer'
 import travel from '../images/travel.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -94,6 +95,7 @@ export const Cities = () => {
           </Card>
         ))}
       </div>
+      <Footer />
     </>
   )
 }

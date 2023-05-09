@@ -2,6 +2,12 @@ import { useEffect } from 'react'
 import { fetchAllItineraries } from '../redux/itinerarySlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Footer } from './Footer'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import { CardActionArea } from '@mui/material'
 
 export function Itineraries () {
   const dispatch = useDispatch()
@@ -15,16 +21,46 @@ export function Itineraries () {
   return (
     <>
       <h2>Itineraries</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-      {itineraryState.list.map((itinerary) => (
-        <div key={itinerary._id} style={{ border: '1px black solid', borderRadius: 15, padding: 15 }}>
-        <h4 >{itinerary.title}</h4>
-        <h5>Price: {itinerary.price}€</h5>
-        <h5>Rating: {itinerary.rating}</h5>
-        <h5>Img: {itinerary.url}</h5>
-        <h5>Duration: {itinerary.duration} day/s</h5>
-        </div>
-      ))}
+      {itineraryState.list.length === 0 ? <h4>No itineraries found</h4> : null}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 10,
+          justifyContent: 'center'
+        }}
+      >
+        {itineraryState.list.map((itinerary) => (
+          <div
+          style={{ width: 180 }}
+            key={itinerary._id}
+          >
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={itinerary.url}
+                  alt="city image"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {itinerary.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Price: {itinerary.price}€ <br />
+                    Rating: {itinerary.rating}<br />
+                    Duration: {itinerary.duration} day/s
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+
+          </div>
+        ))}
+      </div>
+      <div>
+        <Footer />
       </div>
     </>
   )

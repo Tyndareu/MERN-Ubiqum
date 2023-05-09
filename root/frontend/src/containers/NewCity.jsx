@@ -1,4 +1,5 @@
 import { Button } from '@mui/material'
+import { Footer } from './Footer'
 import TextField from '@mui/material/TextField'
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -83,6 +84,7 @@ export const NewCity = () => {
           </Button>
         </div>
       </form>
+      <Footer />
     </>
   )
 }
