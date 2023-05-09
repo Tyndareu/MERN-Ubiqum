@@ -9,7 +9,11 @@ app.listen(PORT, () => {
 }
 )
 
-mongoose.connect(mongoURI, { useNewUrlParser: true })
+mongoose.connect(mongoURI, {
+  dbName: 'UbiqumMERN',
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(
     () => { console.log('connect to MongoDB') },
     err => { console.error(err) }

@@ -33,16 +33,20 @@ export const citiesSlice = createSlice({
 export const { setCities, addCity, deleteCity, editCity } = citiesSlice.actions
 export default citiesSlice.reducer
 
-export const fetchAllCities = () => (dispatch) => {
-  fetch(apiURL + 'all', { method: 'GET' })
-    .then(res => res.json())
-    .then((res) => {
-      dispatch(setCities(res))
-    })
-    .catch(err => console.log(err))
+export const fetchAllCities = () => async (dispatch) => {
+  try {
+    await fetch(apiURL + 'all', { method: 'GET' })
+      .then(res => res.json())
+      .then((res) => {
+        dispatch(setCities(res))
+      })
+      .catch(err => console.log(err))
+  } catch (error) {
+    console.log(error)
+  }
 }
-const postCityDB = (data) => {
-  fetch(
+const postCityDB = async (data) => {
+  await fetch(
     apiURL, {
       method: 'POST',
       headers: {
@@ -52,12 +56,18 @@ const postCityDB = (data) => {
       body: JSON.stringify(data)
     })
 }
-const deleteCityDB = (id) => fetch(apiURL + id, {
-  method: 'DELETE'
-})
+const deleteCityDB = async (id) => {
+  try {
+    await fetch(apiURL + id, {
+      method: 'DELETE'
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-const editCityDB = (id, data) => {
-  fetch(
+const editCityDB = async (id, data) => {
+  await fetch(
     apiURL + 'post/' + id, {
       method: 'POST',
       headers: {

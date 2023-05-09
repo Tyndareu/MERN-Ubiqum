@@ -5,11 +5,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 import { isMobile } from '../components/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { addCity, editCity } from '../features/cities/citiesSlice'
+import { addCity, editCity } from '../redux/citiesSlice'
 export const NewCity = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const cities = useSelector(state => state.tasks)
+  const cities = useSelector(state => state.cities)
   const params = useParams()
   const [city, setCity] = useState({
     name: '',

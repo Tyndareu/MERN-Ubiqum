@@ -6,8 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Landing } from './containers/Landing'
 import { Cities } from './containers/Cities'
 import { NewCity } from './containers/NewCity'
+import { Itineraries } from './containers/Itineraries'
 import { Provider } from 'react-redux'
-import { store } from './app/store'
+import { store } from './redux/store'
 
 const router = createBrowserRouter([
   {
@@ -23,8 +24,12 @@ const router = createBrowserRouter([
     element: <NewCity />
   },
   {
-    path: '/newcity/:id',
+    path: '/newCity/:id',
     element: <NewCity />
+  },
+  {
+    path: '/Itineraries/:name',
+    element: <Itineraries />
   }
 ])
 

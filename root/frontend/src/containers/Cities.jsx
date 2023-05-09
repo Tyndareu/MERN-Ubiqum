@@ -12,7 +12,7 @@ import {
   Button
 } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
-import { deleteCity, fetchAllCities } from '../features/cities/citiesSlice'
+import { deleteCity, fetchAllCities } from '../redux/citiesSlice'
 
 const useStyles = makeStyles({
   root: {
@@ -27,13 +27,13 @@ export const Cities = () => {
   const [searchCity, setSearchCity] = useState('')
   const classes = useStyles()
   const navigate = useNavigate()
-  const cityState = useSelector(state => state.tasks)
+  const cityState = useSelector(state => state.cities)
   const dispatch = useDispatch()
   let cityFilter = []
 
   useEffect(() => {
     dispatch(fetchAllCities())
-  }, [])
+  }, [dispatch])
 
   const handleOnSearchCity = (e) => {
     setSearchCity(e.target.value)
@@ -80,7 +80,7 @@ export const Cities = () => {
                 image={city.img ? city.img : travel}
                 title={city.name}
               />
-              <CardContent>
+              <CardContent onClick={() => navigate('/Itineraries/' + city.name)}>
                 <Typography gutterBottom variant="h5" component="h2">
                   {city.name}
                 </Typography>
