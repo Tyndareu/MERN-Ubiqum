@@ -42,7 +42,7 @@ export const NewCity = () => {
   return (
     <>
       {isMobile ? <Logo /> : null}
-      <h2 className="mb-5">New City</h2>
+      <h2 style={{ marginBottom: 15 }}>New City</h2>
       <form onSubmit={handleOnSubmit}>
         <TextField
           required

@@ -6,7 +6,7 @@ export const Footer = () => {
   const URL = window.location.pathname
   const navigate = useNavigate()
   return (
-    <div className='mt-5' style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+    <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 15 }}>
       <Link hidden={URL === '/'} onClick={() => navigate(-1)}><FaStepBackward /></Link>
       <Link hidden={URL === '/'} onClick={() => navigate('/')}> <FaHome /> </Link>
     </div>

@@ -8,7 +8,6 @@ import { Itineraries } from './containers/Itineraries'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import './Main.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const router = createBrowserRouter([
   {
