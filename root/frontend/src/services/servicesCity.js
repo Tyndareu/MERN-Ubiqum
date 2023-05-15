@@ -36,8 +36,8 @@ export const deleteCityDB = async (id) => {
 
 export const editCityDB = async (id, data) => {
   await fetch(
-    apiURL + 'post/' + id, {
-      method: 'POST',
+    apiURL + id, {
+      method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ router.post('/city/', postCity)
 
 router.delete('/city/:id', deleteCity)
 
-router.post('/post/city/:id', editCity)
+router.put('/city/:id', editCity)
 
 //* itinerary Routes
 
