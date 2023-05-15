@@ -1,6 +1,5 @@
+import { postCityDB, editCityDB, deleteCityDB } from '../services/servicesCity'
 import { createSlice } from '@reduxjs/toolkit'
-
-const apiURL = 'http://localhost:3000/'
 
 export const citiesSlice = createSlice({
   name: 'cities',
@@ -32,48 +31,3 @@ export const citiesSlice = createSlice({
 
 export const { setCities, addCity, deleteCity, editCity } = citiesSlice.actions
 export default citiesSlice.reducer
-
-export const fetchAllCities = () => async (dispatch) => {
-  try {
-    await fetch(apiURL + 'all', { method: 'GET' })
-      .then(res => res.json())
-      .then((res) => {
-        dispatch(setCities(res))
-      })
-      .catch(err => console.log(err))
-  } catch (error) {
-    console.log(error)
-  }
-}
-const postCityDB = async (data) => {
-  await fetch(
-    apiURL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-}
-const deleteCityDB = async (id) => {
-  try {
-    await fetch(apiURL + id, {
-      method: 'DELETE'
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const editCityDB = async (id, data) => {
-  await fetch(
-    apiURL + 'post/' + id, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-}

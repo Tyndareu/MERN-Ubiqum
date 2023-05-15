@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { fetchAllItineraries } from '../redux/itinerarySlice'
+import { fetchAllItineraries } from '../services/servicesItinerary'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Footer } from './Footer'

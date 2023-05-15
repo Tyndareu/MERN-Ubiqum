@@ -18,7 +18,7 @@ export const Landing = () => {
             </div>
             <h4 style={{ marginTop: 15 }}> Find your perfect trip, designed by insider who know and love their cities</h4>
             <h2 style={{ marginTop: 15 }}><strong>Start browsing</strong></h2>
-            <Link onClick={() => navigate('/cities')}> <FaArrowCircleRight /></Link>
+            <Link style={{ cursor: 'pointer' }} onClick={() => navigate('/cities')}> <FaArrowCircleRight /></Link>
             <h4 style={{ marginTop: 15 }}>Want to build your own MYtineracy?</h4>
             <div style={{ marginTop: 15, display: 'flex', justifyContent: 'space-between', width: '70%', margin: 'auto' }}>
                 <Button variant="contained" color="primary">Login</Button>

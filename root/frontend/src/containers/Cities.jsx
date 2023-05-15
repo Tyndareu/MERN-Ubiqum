@@ -13,7 +13,8 @@ import {
   Button
 } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
-import { deleteCity, fetchAllCities } from '../redux/citiesSlice'
+import { deleteCity } from '../redux/citiesSlice'
+import { fetchAllCities } from '../services/servicesCity'
 
 const useStyles = makeStyles({
   root: {

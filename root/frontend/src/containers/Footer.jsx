@@ -6,7 +6,7 @@ export const Footer = () => {
   const URL = window.location.pathname
   const navigate = useNavigate()
   return (
-    <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 15 }}>
+    <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 15, cursor: 'pointer' }}>
       <Link hidden={URL === '/'} onClick={() => navigate(-1)}><FaStepBackward /></Link>
       <Link hidden={URL === '/'} onClick={() => navigate('/')}> <FaHome /> </Link>
     </div>
